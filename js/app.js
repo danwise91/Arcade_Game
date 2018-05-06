@@ -1,17 +1,19 @@
 // Enemies our player must avoid
-const gridTransform = document.querySelector('canvas').getBoundingClientRect();
+const randYCords = [60, 140, 220];
 
-var Enemy = function() {
+var Enemy = function(x, y) {
+    let getStartPos = randYCords[Math.floor(Math.random()*randYCords.length)];
+
     this.sprite = 'images/enemy-bug.png';
-    this.x = gridTransform.right - gridTransform.left;
-    this.y = gridTransform.top - gridTransform.bottom;
+    this.x = 0;
+    this.y = getStartPos;
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
 
     //assign a speed variable randomly
-    this.speed = Math.floor(Math.random()*Math.floor(5));
+    this.speed = Math.floor(Math.random(1)*Math.floor(3) + 1);
 
 };
 
@@ -23,7 +25,15 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    return singleEnemy.speed * dt;
+    if (this.x > 500){
+        this.y = randYCords[Math.floor(Math.random()*randYCords.length)];
+        this.x = 0;
+        this.speed = Math.floor(Math.random(1)*Math.floor(3) + 1);
+    } else {
+        let translate = Math.floor(this.speed * 100 * dt);
+        this.x += translate   
+    }
+     
 };
 
 // Draw the enemy on the screen, required method for game
@@ -31,22 +41,20 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-function addEnemies(array){
-    for (let i = 0; i < 5; i++){
-         array.push(singleEnemy);
-    } 
 
-}
-const singleEnemy = new Enemy();
 
-let allEnemies = [];
+let singleEnemy1 = new Enemy();
+let singleEnemy2 = new Enemy();
+let singleEnemy3 = new Enemy();
+
+let allEnemies = [singleEnemy1, singleEnemy2, singleEnemy3];
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function (){
     this.sprite = 'images/char-boy.png';
-    this.x = gridTransform.right - gridTransform.left;
-    this.y = gridTransform.top - gridTransform.bottom;
+    this.x = 200;
+    this.y = 400;
 }
 
 
@@ -84,8 +92,3 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-function startGame(){
-    addEnemies(allEnemies);
-}
-
-startGame();
