@@ -19,17 +19,6 @@ const singleEnemy = new Enemy();
 
 let allEnemies = [];
 
-function addEnemies(array){
-    for (let i = 0; i < 5; i++){
-            array.push(singleEnemy);
-        array.forEach(function(enemy){
-            enemy.render();
-        });
-    }
-
-    
-}
-
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -44,7 +33,14 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-
+function addEnemies(array){
+    for (let i = 0; i < 5; i++){
+            array.push(singleEnemy);
+    } 
+    array.forEach(function(enemy){
+            enemy.render();
+        });   
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
