@@ -58,8 +58,12 @@ var Player = function (){
 }
 
 
-Player.prototype.update = function(dt){
-
+Player.prototype.update = function(){
+    if (singleEnemy1.x === player.x && singleEnemy1.y === player.y
+        || singleEnemy2.x === player.x && singleEnemy2.y === player.y
+        || singleEnemy3.x == player.x && singleEnemy3.y === player.y){
+        player.y = 0;
+    }
 }
 
 Player.prototype.render = function(){
@@ -67,7 +71,31 @@ Player.prototype.render = function(){
 }
 
 Player.prototype.handleInput = function(){
-
+    if (event.keyCode === 37){
+        player.x -= 100;
+        // console.log("left hit");
+        if (player.x <= 0){
+            player.x = 0;
+        }
+    } else if (event.keyCode === 39){
+        player.x += 100;
+        // console.log("right hit");
+         if (player.x >= 400){
+            player.x = 400;
+        }
+    }else if (event.keyCode === 38){
+        player.y -= 100;
+        // console.log("up hit");
+         if (player.y < 0){
+            player.y = -50;
+        }
+    }else if (event.keyCode === 40){
+        player.y += 100;
+        // console.log("down hit");
+        if (player.y >= 400){
+            player.y = 400;
+        }
+    }
 }
 
 const player = new Player();
