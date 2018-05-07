@@ -72,30 +72,30 @@ Player.prototype.update = function(){
     //create a placeholder value to adjust from the relative x and y coordinates
     const collisionRadius = 12;
     //test the x and y of the three bugs to see how close they are to the player
-    let enemyOneCollideX = singleEnemy1.x >= player.x - collisionRadius &&
-                                singleEnemy1.x <= player.x + collisionRadius;
-    let enemyOneCollideY = singleEnemy1.y >= player.y - collisionRadius &&
-                                singleEnemy1.y <= player.y + collisionRadius;
+    let enemyOneCollideX = singleEnemy1.x >= this.x - collisionRadius &&
+                                singleEnemy1.x <= this.x + collisionRadius;
+    let enemyOneCollideY = singleEnemy1.y >= this.y - collisionRadius &&
+                                singleEnemy1.y <= this.y + collisionRadius;
 
-    let enemyTwoCollideX = singleEnemy2.x >= player.x - collisionRadius &&
-                                singleEnemy2.x <= player.x + collisionRadius; 
-    let enemyTwoCollideY = singleEnemy2.y >= player.y - collisionRadius &&
-                                singleEnemy2.y <= player.y + collisionRadius;
+    let enemyTwoCollideX = singleEnemy2.x >= this.x - collisionRadius &&
+                                singleEnemy2.x <= this.x + collisionRadius; 
+    let enemyTwoCollideY = singleEnemy2.y >= this.y - collisionRadius &&
+                                singleEnemy2.y <= this.y + collisionRadius;
 
-    let enemyThreeCollideX = singleEnemy3.x >= player.x - collisionRadius &&
-                                singleEnemy3.x <= player.x + collisionRadius;
-    let enemyThreeCollideY = singleEnemy3.y >= player.y - collisionRadius &&
-                                singleEnemy3.y <= player.y + collisionRadius;
+    let enemyThreeCollideX = singleEnemy3.x >= this.x - collisionRadius &&
+                                singleEnemy3.x <= this.x + collisionRadius;
+    let enemyThreeCollideY = singleEnemy3.y >= this.y - collisionRadius &&
+                                singleEnemy3.y <= this.y + collisionRadius;
 
     //if the collision occurs then reset the player's position to the beginning
     if (enemyOneCollideX && enemyOneCollideY || 
         enemyTwoCollideX && enemyTwoCollideY || 
         enemyThreeCollideX && enemyThreeCollideY){
-        player.y = 400;
+        this.y = 400;
     }
 
     //if the player reaches the water display the victory message
-    if (player.y === -50){
+    if (this.y === -50){
         playerVictory();
     }
 }
@@ -109,24 +109,24 @@ Player.prototype.render = function(){
 Player.prototype.handleInput = function(){
  if (!playerWin){
     if (event.keyCode === 37){
-        player.x -= 100;
-        if (player.x <= 0){
-            player.x = 0;
+        this.x -= 100;
+        if (this.x <= 0){
+            this.x = 0;
         }
     } else if (event.keyCode === 39){
-        player.x += 100;
-         if (player.x >= 400){
-            player.x = 400;
+        this.x += 100;
+         if (this.x >= 400){
+            this.x = 400;
         }
     }else if (event.keyCode === 38){
-        player.y -= 90;
-         if (player.y < 0){
-            player.y = -50;
+        this.y -= 90;
+         if (this.y < 0){
+            this.y = -50;
         }
     }else if (event.keyCode === 40){
-        player.y += 90;
-        if (player.y >= 400){
-            player.y = 400;
+        this.y += 90;
+        if (this.y >= 400){
+            this.y = 400;
         }
     }
  }
