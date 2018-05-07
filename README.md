@@ -1,4 +1,4 @@
-# Arcade Game Clone (Frogger #
+# Arcade Game Clone (Frogger) #
 ## Getting Started ##
 Clone down or download the project files and open up the folder.
 Click on index.html to load the game.
